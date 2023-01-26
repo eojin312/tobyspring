@@ -3,6 +3,7 @@ package ejlee.tobyspring;
 import ejlee.tobyspring.hello.HelloController;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,12 @@ import java.io.IOException;
 public class TobyspringApplication {
 
     public static void main(String[] args) {
+        // 스프링컨테이너 만들기
+        GenericApplicationContext genericApplicationContext = new GenericApplicationContext(); // 어플리케이션
+        genericApplicationContext.registerBean(HelloController.class); // 빈 등록
+        genericApplicationContext.refresh(); // 초기화
         TomcatServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory(); // 추상클래스 -> Embedded Tomcat 을 이용
         WebServer webServer = tomcatServletWebServerFactory.getWebServer(servletContext -> {
-            HelloController helloController = new HelloController();
             servletContext.addServlet("frontController", new HttpServlet() {
                 @Override
                 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,6 +33,7 @@ public class TobyspringApplication {
                         String name = req.getParameter("name");
 
                         // name 추출
+                        HelloController helloController = genericApplicationContext.getBean(HelloController.class); // 빈 가져오기
                         String hello = helloController.hello(name);
 
                         // response
@@ -38,7 +43,7 @@ public class TobyspringApplication {
                     } else if (req.getRequestURI().equals("/user")) {
                         // response
                         resp.setStatus(HttpStatus.OK.value());
-                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+                        resp.setContentType(MediaType.TEXT_PLAIN_VALUE);
                         resp.getWriter().println("Hello... " + "어진이니?");
                     } else {
                         resp.setStatus(HttpStatus.NOT_FOUND.value());
