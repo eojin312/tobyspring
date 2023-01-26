@@ -1,5 +1,6 @@
 package ejlee.tobyspring;
 
+import ejlee.tobyspring.hello.HelloController;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,7 @@ public class TobyspringApplication {
     public static void main(String[] args) {
         TomcatServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory(); // 추상클래스 -> Embedded Tomcat 을 이용
         WebServer webServer = tomcatServletWebServerFactory.getWebServer(servletContext -> {
+            HelloController helloController = new HelloController();
             servletContext.addServlet("frontController", new HttpServlet() {
                 @Override
                 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,11 +28,13 @@ public class TobyspringApplication {
                         //request
                         String name = req.getParameter("name");
 
+                        // name 추출
+                        String hello = helloController.hello(name);
 
                         // response
                         resp.setStatus(HttpStatus.OK.value());
                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                        resp.getWriter().println("Hello " + name);
+                        resp.getWriter().println(hello); // request 는 helloController 가 처리
                     } else if (req.getRequestURI().equals("/user")) {
                         // response
                         resp.setStatus(HttpStatus.OK.value());
