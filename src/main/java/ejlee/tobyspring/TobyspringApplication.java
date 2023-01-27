@@ -1,6 +1,8 @@
 package ejlee.tobyspring;
 
 import ejlee.tobyspring.hello.HelloController;
+import ejlee.tobyspring.hello.HelloService;
+import ejlee.tobyspring.hello.SimpleHelloService;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.context.support.GenericApplicationContext;
@@ -20,9 +22,12 @@ public class TobyspringApplication {
     public static void main(String[] args) {
         // 스프링컨테이너 만들기
         GenericApplicationContext genericApplicationContext = new GenericApplicationContext(); // 어플리케이션
+        genericApplicationContext.registerBean(SimpleHelloService.class); // 빈 등록
         genericApplicationContext.registerBean(HelloController.class); // 빈 등록
         genericApplicationContext.refresh(); // 초기화
+
         TomcatServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory(); // 추상클래스 -> Embedded Tomcat 을 이용
+
         WebServer webServer = tomcatServletWebServerFactory.getWebServer(servletContext -> {
             servletContext.addServlet("frontController", new HttpServlet() {
                 @Override
@@ -34,6 +39,7 @@ public class TobyspringApplication {
 
                         // name 추출
                         HelloController helloController = genericApplicationContext.getBean(HelloController.class); // 빈 가져오기
+                        SimpleHelloService bean = genericApplicationContext.getBean(SimpleHelloService.class);// 빈 가져오기
                         String hello = helloController.hello(name);
 
                         // response
