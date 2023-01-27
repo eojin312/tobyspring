@@ -1,18 +1,33 @@
 package ejlee.tobyspring;
 
 import ejlee.tobyspring.hello.HelloController;
+import ejlee.tobyspring.hello.HelloService;
 import ejlee.tobyspring.hello.SimpleHelloService;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+@Configuration // 스프링 구성정보다 설정해주는 것
 public class TobyspringApplication {
+
+    @Bean
+    public HelloController helloController(HelloService helloService) {
+        return new HelloController(helloService);
+    }
+
+    @Bean
+    public HelloService helloService() {
+        return new SimpleHelloService();
+    };
 
     public static void main(String[] args) {
         // 스프링컨테이너 만들기
-        GenericWebApplicationContext genericApplicationContext = new GenericWebApplicationContext() {
+        AnnotationConfigWebApplicationContext genericApplicationContext = new AnnotationConfigWebApplicationContext() {
             @Override
             protected void onRefresh() {
                 super.onRefresh();
@@ -26,9 +41,7 @@ public class TobyspringApplication {
                 webServer.start();
             }
         };
-
-        genericApplicationContext.registerBean(SimpleHelloService.class); // 빈 등록
-        genericApplicationContext.registerBean(HelloController.class); // 빈 등록
+        genericApplicationContext.register(TobyspringApplication.class); // 자바코드로 구성정보를 등록해줘야해서 register 호출
         genericApplicationContext.refresh(); // 스프링 컨테이너 초기화
     }
 }
