@@ -20,7 +20,8 @@ public class TobyspringApplication {
         TomcatServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory(); // 추상클래스 -> Embedded Tomcat 을 이용
 
         WebServer webServer = tomcatServletWebServerFactory.getWebServer(servletContext -> {
-            servletContext.addServlet("dispatherServlet", new DispatcherServlet(genericApplicationContext))
+            servletContext.addServlet("dispatherServlet",
+                            new DispatcherServlet(genericApplicationContext))
                     .addMapping("/*"); // url mapping -> 모든 url 을 검증하겠다
         }); // ServletContextInitializer 는 서블릿 컨테이너에다가 서블릿 등록하는데 지원해주는
         webServer.start();
