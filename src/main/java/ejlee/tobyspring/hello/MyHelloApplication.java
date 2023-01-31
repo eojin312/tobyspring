@@ -7,7 +7,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class MyHelloApplication {
-    public static void run(Class<?> c, String... args) {
+    public static void run(Class<?> clazz, String... args) {
         // 스프링컨테이너 만들기
         AnnotationConfigWebApplicationContext genericApplicationContext = new AnnotationConfigWebApplicationContext() {
             @Override
@@ -23,7 +23,7 @@ public class MyHelloApplication {
                 webServer.start();
             }
         };
-        genericApplicationContext.register(TobyspringApplication.class); // 자바코드로 구성정보를 등록해줘야해서 register 호출
+        genericApplicationContext.register(clazz); // 자바코드로 구성정보를 등록해줘야해서 register 호출
         genericApplicationContext.refresh(); // 스프링 컨테이너 초기화
     }
 }
