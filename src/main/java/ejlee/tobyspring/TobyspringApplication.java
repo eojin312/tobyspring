@@ -27,6 +27,6 @@ public class TobyspringApplication {
 
 
     public static void main(String[] args) {
-        MyHelloApplication.run(HelloController.class, args);
+        MyHelloApplication.run(TobyspringApplication.class, args);
     }
 }
