@@ -31,7 +31,6 @@ public class TobyspringApplication {
                 super.onRefresh();
                 ServletWebServerFactory servletWebServerFactory = this.getBean(ServletWebServerFactory.class);
                 DispatcherServlet dispatcherServlet = this.getBean(DispatcherServlet.class);
-                dispatcherServlet.setApplicationContext(this);
 
                 // Bean 으로 등록한 Factory 와 DispatcherServlet 사용하기
                 WebServer webServer = servletWebServerFactory.getWebServer(servletContext -> {
