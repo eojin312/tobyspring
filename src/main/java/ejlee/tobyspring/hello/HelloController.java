@@ -11,13 +11,9 @@ import java.util.Objects;
 public class HelloController {
 
     private final HelloService helloService;
-    private final ApplicationContext context;
 
-    public HelloController(HelloService helloService, ApplicationContext context) {
+    public HelloController(HelloService helloService) {
         this.helloService = helloService;
-        this.context = context;
-
-        System.out.println(context);
     }
 
     @GetMapping("/hello")
