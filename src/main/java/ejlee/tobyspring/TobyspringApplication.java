@@ -2,6 +2,7 @@ package ejlee.tobyspring;
 
 import ejlee.tobyspring.hello.HelloController;
 import ejlee.tobyspring.hello.MyHelloApplication;
+import ejlee.tobyspring.hello.MySpringBootAnnotation;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
@@ -11,8 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-@Configuration // 스프링 구성정보다 설정해주는 것
-@ComponentScan // Component 가 붙어져있는 클래스를 모두 빈으로 등록해줌
+@MySpringBootAnnotation
 public class TobyspringApplication {
 
     @Bean
