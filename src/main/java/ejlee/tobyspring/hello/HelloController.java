@@ -20,7 +20,7 @@ public class HelloController {
         System.out.println(context);
     }
 
-    @GetMapping
+    @GetMapping("/hello")
     @ResponseBody // dispatherServlet 은 응답 타입이 string 이면, veiw 페이지를 찾는데, 우리는 String 그대로 내려주고싶어서 responseBody 붙임
     public String hello(String name) {
         return helloService.sayHello(Objects.requireNonNull(name));

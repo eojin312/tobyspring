@@ -13,6 +13,7 @@ public class MySpringApplication {
             @Override
             protected void onRefresh() {
                 super.onRefresh();
+
                 ServletWebServerFactory servletWebServerFactory = this.getBean(ServletWebServerFactory.class);
                 DispatcherServlet dispatcherServlet = this.getBean(DispatcherServlet.class);
 
