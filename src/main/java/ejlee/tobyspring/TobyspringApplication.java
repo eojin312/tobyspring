@@ -13,6 +13,15 @@ import org.springframework.web.servlet.DispatcherServlet;
 @ComponentScan // Component 가 붙어져있는 클래스를 모두 빈으로 등록해줌
 public class TobyspringApplication {
 
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new TomcatServletWebServerFactory();
+    }
+
+    @Bean
+    public DispatcherServlet dispatcherServlet() {
+        return new DispatcherServlet();
+    }
     public static void main(String[] args) {
         MySpringApplication.run(HelloController.class, args);
     }
