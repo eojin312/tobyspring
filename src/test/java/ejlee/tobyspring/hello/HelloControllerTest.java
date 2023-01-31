@@ -35,4 +35,13 @@ class HelloControllerTest {
             String ret = helloController.hello("");
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void helloDecorator() {
+        HelloDecorator helloDecorator = new HelloDecorator(name -> name);
+
+        String ret = helloDecorator.sayHello("Test");
+
+        Assertions.assertThat(ret).isEqualTo("*Test*");
+    }
 }
