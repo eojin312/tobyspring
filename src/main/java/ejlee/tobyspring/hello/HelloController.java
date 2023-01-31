@@ -1,19 +1,23 @@
 package ejlee.tobyspring.hello;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
-@RequestMapping("/hello") // dispatherServlet 이 찾을 수 쉽게 클래스단에 적용
-@MyComponent
+@RestController
 public class HelloController {
 
     private final HelloService helloService;
+    private final ApplicationContext context;
 
-    public HelloController(HelloService helloService) {
+    public HelloController(HelloService helloService, ApplicationContext context) {
         this.helloService = helloService;
+        this.context = context;
+
+        System.out.println(context);
     }
 
     @GetMapping
