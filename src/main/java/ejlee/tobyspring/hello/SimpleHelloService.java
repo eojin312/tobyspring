@@ -1,9 +1,11 @@
 package ejlee.tobyspring.hello;
 
-@MyComponent
-public class SimpleHelloService {
+import org.springframework.stereotype.Service;
 
-    String sayHello(String name) {
-        return name;
+@Service
+public class SimpleHelloService implements HelloService {
+    @Override
+    public String sayHello(String name) {
+        return "Hello " + name;
     }
 }
