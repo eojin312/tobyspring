@@ -1,20 +1,11 @@
 package ejlee.tobyspring.hello;
 
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-@ComponentScan
-@Configuration
 public class MySpringApplication {
-
-
-
 
     public static void run(Class<?> applicationClass, String... args) {
         // 스프링컨테이너 만들기
