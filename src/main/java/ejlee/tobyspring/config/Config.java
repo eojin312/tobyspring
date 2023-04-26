@@ -1,4 +1,4 @@
-package ejlee.tobyspring.hello;
+package ejlee.tobyspring.config;
 
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
