@@ -1,6 +1,5 @@
 package ejlee.tobyspring.hello;
 
-import ejlee.tobyspring.TobyspringApplication;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;

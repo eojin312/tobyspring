@@ -17,7 +17,10 @@ public class HelloController {
     @GetMapping("/hello")
     @ResponseBody
     public String hello(String name) {
-        if (name == null || name.trim().length() == 0) throw new IllegalArgumentException();
+        if (name == null || name.trim().length() == 0) {
+            throw new IllegalArgumentException();
+        }
+
         return helloService.sayHello(Objects.requireNonNull(name));
     }
 }

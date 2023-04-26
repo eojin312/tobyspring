@@ -1,4 +1,4 @@
-package ejlee.tobyspring;
+package ejlee.tobyspring.config;
 
 import ejlee.tobyspring.hello.MyHelloApplication;
 import ejlee.tobyspring.hello.MySpringBootAnnotation;

@@ -1,6 +1,5 @@
-package ejlee.tobyspring.hello;
+package ejlee.tobyspring.config;
 
-import ejlee.tobyspring.config.EnableMyAutoConfiguration;
 import ejlee.tobyspring.config.autoConfig.DispatcherServletConfig;
 import ejlee.tobyspring.config.autoConfig.TomcatWebServerConfig;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,10 +11,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME) // java annotation 은 class 라 runtime 시점까지 살아있도록하기위함
-@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE, ElementType.METHOD})
-@ComponentScan
-@Configuration
-@EnableMyAutoConfiguration
-public @interface MySpringBootAnnotation {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Import({DispatcherServletConfig.class, TomcatWebServerConfig.class})
+public @interface EnableMyAutoConfiguration {
 }
