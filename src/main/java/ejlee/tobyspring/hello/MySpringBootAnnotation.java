@@ -1,5 +1,6 @@
 package ejlee.tobyspring.hello;
 
+import ejlee.tobyspring.config.EnableMyAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,5 +13,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @ComponentScan
 @Configuration
+@EnableMyAutoConfiguration
 public @interface MySpringBootAnnotation {
 }
